@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
+import {Link} from 'react-router-dom'
 
 
 
@@ -13,13 +14,18 @@ export function Home() {
 
     if (data) {
         return (
-            <ul>
-                {data.map((item) =>
-                (<li>
-                    {item.name.common}
-                </li>)
-                )}
-            </ul>
+            <>
+                <h1>Country List</h1>
+                <ul>
+                    {data.map((item) =>
+                    (<li>
+                        <Link to={'/Country/' + item.name.common} >
+                            {item.name.common}
+                        </Link>
+                    </li>)
+                    )}
+                </ul>
+            </>
         )
     }
 

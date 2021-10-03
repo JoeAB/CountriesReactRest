@@ -3,6 +3,8 @@ import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
+import { Country } from './components/Country';
+
 
 
 import './custom.css'
@@ -12,9 +14,11 @@ export default class App extends Component {
 
   render () {
       return (
-              <Layout>
-                  <Route path='/' component={Home} />
-              </Layout>
+            <Layout>
+              <Route exact path='/' component={Home} />
+              <Route path='/Country/:id' component={Country} />
+
+            </Layout>
 
     );
   }
