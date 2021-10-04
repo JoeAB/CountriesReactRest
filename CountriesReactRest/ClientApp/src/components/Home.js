@@ -8,11 +8,19 @@ export function Home() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    //for visited data fetch
+    const [dataLocalAPI, setDataLocal] = useState(null);
+
+
     useEffect(() => {
         fetch('https://restcountries.com/v3.1/all').then((response) => response.json()).then(setData).then(() => setLoading(false)).catch(setError);
     }, []);
 
-    if (data) {
+    useEffect(() => {
+        fetch('/App/GetVisitedCountries').then((response) => response.json()).then(setDataLocal);
+    }, []);
+
+    if (data && dataLocalAPI) {
         return (
             <>
                 <h1>Country List</h1>
@@ -22,6 +30,8 @@ export function Home() {
                         <Link to={'/Country/' + item.name.common} >
                             {item.name.common}
                         </Link>
+                        {dataLocalAPI.Countries.some(val => val === item.name.common) ? <span className="Bolded"> *</span> : <span> </span> }
+
                     </li>)
                     )}
                 </ul>
