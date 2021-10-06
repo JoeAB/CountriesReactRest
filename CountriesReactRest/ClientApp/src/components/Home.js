@@ -30,7 +30,7 @@ export function Home() {
                         <Link to={'/Country/' + item.name.common} >
                             {item.name.common}
                         </Link>
-                        {dataLocalAPI.Countries.some(val => val === item.name.common) ? <span className="Bolded"> *</span> : <span> </span> }
+                        {dataLocalAPI.Countries.some(val => val === item.name.common) && <span className="Bolded"> *</span> }
 
                     </li>)
                     )}
