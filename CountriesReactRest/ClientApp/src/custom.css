@@ -19,3 +19,7 @@ code {
     color: red;
     vertical-align: middle;
 }
+
+.Flag{
+    border: 1px solid black;
+}

@@ -24,17 +24,18 @@ export function Home() {
         return (
             <>
                 <h1>Country List</h1>
-                <ul>
+                <div className="container-fluid">
                     {data.map((item) =>
-                    (<li>
-                        <Link to={'/Country/' + item.name.common} >
-                            {item.name.common}
-                        </Link>
-                        {dataLocalAPI.Countries.some(val => val === item.name.common) && <span className="Bolded"> *</span> }
-
-                    </li>)
+                    (<div className="row">
+                        <div className="col-md-12">
+                            <Link to={'/Country/' + item.name.common} >
+                                {item.name.common}
+                            </Link>
+                            {dataLocalAPI.Countries.some(val => val === item.name.common) && <span className="Bolded"> *</span> }
+                        </div>
+                    </div>)
                     )}
-                </ul>
+                </div>
             </>
         )
     }
