@@ -17,10 +17,10 @@ export function Country() {
 
     if (data) {
         return (
-            <>
-                <h1>{data[0].name.common}</h1>
-                <img src={''+data[0].flags.png} />
-            </>
+            <div className="row">
+                <h1 className="col-md-6">{data[0].name.common}</h1>
+                <img className="col-md-6" src={''+data[0].flags.png} />
+            </div>
         )
     }
 
