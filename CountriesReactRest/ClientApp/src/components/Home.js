@@ -1,40 +1,69 @@
 import React, { Component, useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
+import CountryList from "./CountryList"
 
 
+
+function sortByName(data) {
+    let newArray = [...data].sort((a, b) => {
+        let order = 1;
+        return (
+            a.name.common.toLowerCase() < b.name.common.toLowerCase()
+                ? -1 * order : 1 * order
+        )
+    })
+    return newArray;
+
+}
+
+function sortByPopulation(data) {
+    let newArray = [...data].sort((a, b) => {
+        let order = 1;
+        return (
+            a.population < b.population
+                ? -1 * order : 1 * order
+        )
+    })
+    return newArray;
+}
 
 export function Home() {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [sortedData, setSortedData] = useState(null);
 
     //for visited data fetch
     const [dataLocalAPI, setDataLocal] = useState(null);
 
 
     useEffect(() => {
-        fetch('https://restcountries.com/v3.1/all').then((response) => response.json()).then(setData).then(() => setLoading(false)).catch(setError);
+        fetch('https://restcountries.com/v3.1/all').then((response) => response.json()).then(setData)
+            .then(() => setLoading(false)).catch(setError);
     }, []);
 
     useEffect(() => {
         fetch('/App/GetVisitedCountries').then((response) => response.json()).then(setDataLocal);
     }, []);
 
-    if (data && dataLocalAPI) {
+    useEffect(() => {
+        setSortedData(sortByName(data));
+    }, [data]);
+
+    if (data) {
         return (
             <>
-                <h1>Country List</h1>
                 <div className="container-fluid">
-                    {data.map((item) =>
-                    (<div className="row">
-                        <div className="col-md-12">
-                            <Link to={'/Country/' + item.name.common} >
-                                {item.name.common}
-                            </Link>
-                            {dataLocalAPI.Countries.some(val => val === item.name.common) && <span className="Bolded"> *</span> }
+                    <h1>Country List</h1>
+                    <div className="row">
+                        <div className="col-md2">
+                            <button onClick={() => setSortedData(sortByName(data))}>Sort by Name</button>
                         </div>
-                    </div>)
-                    )}
+                        <div className="col-md2">
+                            <button onClick={() => setSortedData(sortByPopulation(data))}>Sort by Population</button>
+                        </div>
+                    </div>
+                    <CountryList sortData={sortedData} dataLocalAPI={dataLocalAPI} />
                 </div>
             </>
         )
