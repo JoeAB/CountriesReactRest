@@ -2,36 +2,12 @@ import React, { Component, useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import CountryList from "./CountryList"
 
-
-
-function sortByName(data) {
-    let newArray = [...data].sort((a, b) => {
-        let order = 1;
-        return (
-            a.name.common.toLowerCase() < b.name.common.toLowerCase()
-                ? -1 * order : 1 * order
-        )
-    })
-    return newArray;
-
-}
-
-function sortByPopulation(data) {
-    let newArray = [...data].sort((a, b) => {
-        let order = 1;
-        return (
-            a.population < b.population
-                ? -1 * order : 1 * order
-        )
-    })
-    return newArray;
-}
-
 export function Home() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [sortedData, setSortedData] = useState(null);
+    const [sortData, setSortData] = useState("name");
+    const [orderBy, setOrderBy] = useState("asc");
 
     //for visited data fetch
     const [dataLocalAPI, setDataLocal] = useState(null);
@@ -46,9 +22,22 @@ export function Home() {
         fetch('/App/GetVisitedCountries').then((response) => response.json()).then(setDataLocal);
     }, []);
 
-    useEffect(() => {
-        setSortedData(sortByName(data));
-    }, [data]);
+    const sortedData = [...data].sort((a, b) => {
+        if (sortData === "name") {
+            let order = (orderBy === 'asc') ? 1 : -1;
+            return (
+                a.name.common.toLowerCase() < b.name.common.toLowerCase()
+                    ? -1 * order : 1 * order
+            )
+        } else if (sortData === "population") {
+
+            let order = (orderBy === 'asc') ? 1 : -1;
+            return (
+                a.population < b.population
+                    ? -1 * order : 1 * order
+            )
+        }
+    })
 
     if (data) {
         return (
@@ -56,11 +45,16 @@ export function Home() {
                 <div className="container-fluid">
                     <h1>Country List</h1>
                     <div className="row">
-                        <div className="col-md2">
-                            <button onClick={() => setSortedData(sortByName(data))}>Sort by Name</button>
+                        <div className="col-md-1">
+                            <button onClick={() => setOrderBy( orderBy == "asc" ? "desc" : "asc" ) } >
+                                {orderBy}
+                            </button>
                         </div>
-                        <div className="col-md2">
-                            <button onClick={() => setSortedData(sortByPopulation(data))}>Sort by Population</button>
+                        <div className="col-md-2">
+                            <button onClick={() => setSortData("name")}>Sort by Name</button>
+                        </div>
+                        <div className="col-md-2">
+                            <button onClick={() => setSortData("population")}>Sort by Population</button>
                         </div>
                     </div>
                     <CountryList sortData={sortedData} dataLocalAPI={dataLocalAPI} />
