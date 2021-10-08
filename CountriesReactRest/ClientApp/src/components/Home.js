@@ -22,7 +22,7 @@ export function Home() {
         fetch('/App/GetVisitedCountries').then((response) => response.json()).then(setDataLocal);
     }, []);
 
-    const sortedData = [...data].sort((a, b) => {
+    const sortedData = data.sort((a, b) => {
         if (sortData === "name") {
             let order = (orderBy === 'asc') ? 1 : -1;
             return (
