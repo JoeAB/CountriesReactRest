@@ -23,3 +23,7 @@ code {
 .Flag{
     border: 1px solid black;
 }
+
+.buttonRow {
+    height: 100%;
+}

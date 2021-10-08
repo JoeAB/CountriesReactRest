@@ -1,5 +1,4 @@
 import React, { Component, useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
 import CountryList from "./CountryList"
 
 export function Home() {
@@ -11,7 +10,6 @@ export function Home() {
 
     //for visited data fetch
     const [dataLocalAPI, setDataLocal] = useState(null);
-
 
     useEffect(() => {
         fetch('https://restcountries.com/v3.1/all').then((response) => response.json()).then(setData)
@@ -30,31 +28,43 @@ export function Home() {
                     ? -1 * order : 1 * order
             )
         } else if (sortData === "population") {
-
             let order = (orderBy === 'asc') ? 1 : -1;
             return (
                 a.population < b.population
                     ? -1 * order : 1 * order
             )
+        } else if (sortData === "size") {
+            let order = (orderBy === 'asc') ? 1 : -1;
+            return (
+                a.area < b.area
+                    ? -1 * order : 1 * order
+            )
         }
+
     })
 
     if (data) {
         return (
             <>
                 <div className="container-fluid">
-                    <h1>Country List</h1>
-                    <div className="row">
+                    <h1>Countries</h1>
+                    <div className="row buttonRow">
                         <div className="col-md-1">
-                            <button onClick={() => setOrderBy( orderBy == "asc" ? "desc" : "asc" ) } >
+                            <button className="btn btn-lg btn-primary" onClick={() => setOrderBy( orderBy == "asc" ? "desc" : "asc" ) } >
                                 {orderBy}
                             </button>
                         </div>
                         <div className="col-md-2">
-                            <button onClick={() => setSortData("name")}>Sort by Name</button>
+                            <button className={`buttonRow btn btn-lg ${sortData === "name" ? 'btn-primary' : 'btn-secondary'}`}
+                                onClick={() => setSortData("name")}>Sort by Name</button>
                         </div>
                         <div className="col-md-2">
-                            <button onClick={() => setSortData("population")}>Sort by Population</button>
+                            <button className={`buttonRow btn btn-lg ${sortData === "population" ? 'btn-primary' : 'btn-secondary'}`}
+                                onClick={() => setSortData("population")}>Sort by Population</button>
+                        </div>
+                        <div className="col-md-2">
+                            <button className={`buttonRow btn btn-lg ${sortData === "size" ? 'btn-primary' : 'btn-secondary'}`}
+                                onClick={() => setSortData("size")}>Sort by Size</button>
                         </div>
                     </div>
                     <CountryList sortData={sortedData} dataLocalAPI={dataLocalAPI} />
