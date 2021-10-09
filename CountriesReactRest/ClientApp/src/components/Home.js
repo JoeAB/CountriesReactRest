@@ -1,5 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import CountryList from "./CountryList"
+import ChartView from "./ChartView"
+
 
 export function Home() {
     const [data, setData] = useState([]);
@@ -67,6 +69,7 @@ export function Home() {
                                 onClick={() => setSortData("size")}>Sort by Size</button>
                         </div>
                     </div>
+                    <ChartView sortData={sortedData} sortedByProp={sortData} countryCount={10 }/>
                     <CountryList sortData={sortedData} dataLocalAPI={dataLocalAPI} />
                 </div>
             </>
