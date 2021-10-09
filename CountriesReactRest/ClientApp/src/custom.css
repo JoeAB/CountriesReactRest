@@ -27,3 +27,8 @@ code {
 .buttonRow {
     height: 100%;
 }
+
+.leaflet-container {
+    height: 250px;
+    width: 100%;
+}
