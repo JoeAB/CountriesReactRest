@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import CountryList from "./CountryList"
 import ChartView from "./ChartView"
 import SortByButton from "./SortByButton"
+import OrderByButton from './OrderByButton';
 
 
 export function Home() {
@@ -72,9 +73,7 @@ export function Home() {
                         <>
                         <div className="row buttonRow">
                             <div className="col-md-1">
-                                <button className="btn btn-sm btn-primary" onClick={() => setOrderBy(orderBy == "asc" ? "desc" : "asc")} >
-                                    {orderBy}
-                                </button>
+                                <OrderByButton orderByValue={orderBy} setOrderBy={ order => setOrderBy(order) }/>
                             </div>
                             <div className="col-md-2">
                                 <SortByButton actualSortSelection={sortData} buttonValue="name" setSortData={sort => setSortData(sort)} />
