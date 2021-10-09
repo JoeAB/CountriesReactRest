@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import CountryList from "./CountryList"
 import ChartView from "./ChartView"
+import SortByButton from "./SortByButton"
 
 
 export function Home() {
@@ -76,16 +77,13 @@ export function Home() {
                                 </button>
                             </div>
                             <div className="col-md-2">
-                                <button className={`buttonRow btn btn-sm ${sortData === "name" ? 'btn-primary' : 'btn-secondary'}`}
-                                    onClick={() => setSortData("name")}>Sort by Name</button>
+                                <SortByButton actualSortSelection={sortData} buttonValue="name" setSortData={sort => setSortData(sort)} />
                             </div>
                             <div className="col-md-2">
-                                <button className={`buttonRow btn btn-sm ${sortData === "population" ? 'btn-primary' : 'btn-secondary'}`}
-                                    onClick={() => setSortData("population")}>Sort by Population</button>
+                                <SortByButton actualSortSelection={sortData} buttonValue="population" setSortData={sort => setSortData(sort)} />
                             </div>
                             <div className="col-md-2">
-                                <button className={`buttonRow btn btn-sm ${sortData === "size" ? 'btn-primary' : 'btn-secondary'}`}
-                                    onClick={() => setSortData("size")}>Sort by Size</button>
+                                <SortByButton actualSortSelection={sortData} buttonValue="size" setSortData={sort => setSortData(sort)} />
                             </div>
                         </div>
                         <br />
