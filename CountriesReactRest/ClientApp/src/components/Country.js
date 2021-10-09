@@ -27,7 +27,7 @@ export function Country() {
                 </div>
                 <div className="row">
                     <span className="col-md-6">
-                        <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+                        <MapContainer center={position} zoom={3} scrollWheelZoom={false}>
                             <TileLayer
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
