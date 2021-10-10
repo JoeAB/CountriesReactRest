@@ -20,6 +20,10 @@ code {
     vertical-align: middle;
 }
 
+.Label {
+    font-weight: bold;
+}
+
 .Flag{
     border: 1px solid black;
 }

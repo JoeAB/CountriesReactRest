@@ -35,8 +35,48 @@ export function Country() {
             <>
                 
                 <div className="row">
-                    <span className="col-md-6"><h1>{data[0].name.common}</h1></span>
-                    <span className="col-md-6"><img className="Flag" src={'' + data[0].flags.png} /></span>
+                    <div className="col-md-6">
+                        <div className="container-fluid">
+                            <div className="row">
+                                <span className="col-md-12">
+                                    <h1>{data[0].name.common}</h1>
+                                </span>
+                            </div>
+                            <div className="row">
+                                <span className="col-md-12"><img className="Flag" src={'' + data[0].flags.png} /></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="container-fluid">
+                            <div className="row">
+                                <span className="col-md-4 Label">
+                                    Official Name
+                                </span>
+                                <span className="col-md-8">
+                                    {data[0].name.official}
+                                </span>
+                            </div>
+                            <div className="row">
+                                <span className="col-md-4 Label">
+                                    Population
+                                </span>
+                                <span className="col-md-8">
+                                    {data[0].population.toLocaleString()}
+                                </span>
+                            </div>
+                            <div className="row">
+                                <span className="col-md-4 Label">
+                                    Size
+                                </span>
+                                <span className="col-md-8">
+                                    {data[0].area.toLocaleString()} Square Kilometers
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
                 </div>
                 <div className="row">
                     <span className="col-md-12">
