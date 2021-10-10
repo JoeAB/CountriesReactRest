@@ -13,7 +13,7 @@ export function Country() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('https://restcountries.com/v3.1/name/'+country).then((response) => response.json()).then(setData).then(() => setLoading(false)).catch(setError);
+        fetch('https://restcountries.com/v3.1/alpha/'+country).then((response) => response.json()).then(setData).then(() => setLoading(false)).catch(setError);
     }, []);
 
     if (data) {

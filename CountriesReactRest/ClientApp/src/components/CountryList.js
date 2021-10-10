@@ -9,7 +9,7 @@ export function CountryList({ sortData, dataLocalAPI}) {
             {sortData && sortData.map((item) =>
                 (<div className="row">
                     <div className="col-md-12">
-                        <Link to={'/Country/' + item.name.common} >
+                        <Link to={'/Country/' + item.cca3} >
                             {item.name.common}
                         </Link>
                         {dataLocalAPI.Countries.some(val => val === item.name.common) && <span className="Bolded"> *</span>}
