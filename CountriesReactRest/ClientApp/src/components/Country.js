@@ -3,6 +3,17 @@ import { Link, useLocation } from 'react-router-dom'
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 
+function setZoom(area) {
+    if (area < 50) {
+        return 8;
+    } else if (area < 6000000)
+    {
+        return 5;
+    }
+    else {
+        return 3;
+    }
+}
 
 export function Country() {
     let location = useLocation();
@@ -18,6 +29,8 @@ export function Country() {
 
     if (data) {
         const position = [data[0].latlng[0], data[0].latlng[1]]
+        const zoom = setZoom(data[0].area)
+
         return (
             <>
                 
@@ -26,8 +39,8 @@ export function Country() {
                     <span className="col-md-6"><img className="Flag" src={'' + data[0].flags.png} /></span>
                 </div>
                 <div className="row">
-                    <span className="col-md-6">
-                        <MapContainer center={position} zoom={3} scrollWheelZoom={false}>
+                    <span className="col-md-12">
+                        <MapContainer center={position} zoom={zoom} scrollWheelZoom={false}>
                             <TileLayer
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
