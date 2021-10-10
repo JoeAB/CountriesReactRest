@@ -73,6 +73,36 @@ export function Country() {
                                     {data[0].area.toLocaleString()} Square Kilometers
                                 </span>
                             </div>
+                            {
+                                data[0].capital &&
+                                <div className="row">
+                                    <span className="col-md-4 Label">
+                                        {data[0].capital.length > 1 ? "Capitals" : "Capital" }
+                                    </span>
+                                    <span className="col-md-8">
+                                        {data[0].capital.map((item) =>
+                                            <div>{item}</div>
+                                        )}
+                                    </span>
+                                </div>
+                            }
+                            {
+                                data[0].languages &&
+                                <div className="row">
+                                    <span className="col-md-4 Label">
+                                        { Object.keys(data[0].languages).length > 1 ? "Languages" : "Language"}
+                                    </span>
+                                    <span className="col-md-8">
+                                        {
+                                            Object.values(data[0].languages).map(value => (
+                                                <div>
+                                                    {value}
+                                                </div>
+                                            ))
+                                        }
+                                    </span>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
