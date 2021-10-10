@@ -58,36 +58,33 @@ export function Home() {
                     <h1>Countries</h1>
                     < br/>
                     <div className="row buttonRow">
-                        <div className="col-md-1"></div>
-                        <div className="col-md-2">
+                        <div className="col-md-1">
                             <button className={`buttonRow btn btn-sm ${showChartView? 'btn-primary' : 'btn-secondary'}`}
                                 onClick={() => setShowChartView(!showChartView)}>Chart</button>
                         </div>
-                        <div className="col-md-2">
+                        <div className="col-md-1">
                             <button className={`buttonRow btn btn-sm ${showListView? 'btn-primary' : 'btn-secondary'}`}
                                 onClick={() => setShowListView(!showListView)}>List</button>
                         </div>
+                        {(showChartView || showListView) &&
+                            <>
+                                <div className="col-md-2">
+                                    <SortByButton actualSortSelection={sortData} buttonValue="name" setSortData={sort => setSortData(sort)} />
+                                </div>
+                                <div className="col-md-2">
+                                    <SortByButton actualSortSelection={sortData} buttonValue="population" setSortData={sort => setSortData(sort)} />
+                                </div>
+                                <div className="col-md-2">
+                                    <SortByButton actualSortSelection={sortData} buttonValue="size" setSortData={sort => setSortData(sort)} />
+                                </div>
+                                <div className="col-md-1">
+                                    <OrderByButton orderByValue={orderBy} setOrderBy={order => setOrderBy(order)} />
+                                </div>
+                            </>
+                        }
                     </div>
                     <br />
-                    {(showChartView || showListView) &&
-                        <>
-                        <div className="row buttonRow">
-                            <div className="col-md-1">
-                                <OrderByButton orderByValue={orderBy} setOrderBy={ order => setOrderBy(order) }/>
-                            </div>
-                            <div className="col-md-2">
-                                <SortByButton actualSortSelection={sortData} buttonValue="name" setSortData={sort => setSortData(sort)} />
-                            </div>
-                            <div className="col-md-2">
-                                <SortByButton actualSortSelection={sortData} buttonValue="population" setSortData={sort => setSortData(sort)} />
-                            </div>
-                            <div className="col-md-2">
-                                <SortByButton actualSortSelection={sortData} buttonValue="size" setSortData={sort => setSortData(sort)} />
-                            </div>
-                        </div>
-                        <br />
-                        </>
-                    }
+
                     {showChartView &&
                         <div className="row">
                             <ChartView sortData={sortedData} sortedByProp={sortData} countryCount={10} />
